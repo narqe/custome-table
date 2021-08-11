@@ -12,7 +12,7 @@ class API {
                 gradePointAverage:7.0,
                 sanctions:false,
                 failingGrades:2,
-                state:"ACTIVE",
+                state:"INACTIVE",
                 extend:false,
                 type:"BENEFIT",
                 originId:"1202",
