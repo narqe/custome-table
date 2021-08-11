@@ -1,0 +1,146 @@
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import Collapse from '@material-ui/core/Collapse';
+import IconButton from '@material-ui/core/IconButton';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
+import EnhancedTableToolbar from '../helpers/EnhancedTableToolbar';
+import { useTranslation } from 'react-i18next';
+import '../../../translations/i18n';
+import Paginator from '../helpers/Paginator';
+import TableLoading from '../helpers/TableLoading';
+
+const CollapsibleTable = ({
+  title,
+  subtitle,
+  massiveActions,
+  rowsData,
+  columnsData,
+  isLoading,
+  pageNo,
+  pageSize,
+  resultsPerPage,
+  onChangePage,
+  onChangeSizePage,
+  totalPages,
+  actionsButtons,
+  actionsByRow: ActionComponent,
+  collapsibleComponent: CollapsibleComponent,
+}) => {
+  const { t } = useTranslation();
+
+  if (!!isLoading) {
+    return <TableLoading />;
+  }
+
+  return (
+    <>
+      <TableContainer>
+        <EnhancedTableToolbar
+          title={title}
+          subtitle={subtitle}
+          massiveActions={massiveActions}
+        />
+        <Table size="small" aria-label="collapsible table">
+          <TableHead>
+            <TableRow>
+              <TableCell align="center">
+                <IconButton aria-label="expand row" size="small" />
+              </TableCell>
+              {columnsData.map(({ headerName }, indexCol) => (
+                <TableCell align="center" key={indexCol}>{t(headerName)}</TableCell>
+              ))}
+              {!!actionsButtons && (
+                <TableCell align="center">{t('actionsLabel')}</TableCell>
+              )}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rowsData.map((row, rowIndex) => (
+              <RowLoop
+                key={Math.random()}
+                index={Math.random()}
+                row={row}
+                columnsData={columnsData}
+                collapsibleComponent={
+                  <CollapsibleComponent row={row} indexRow={rowIndex} />
+                }
+                actionsButtons={actionsButtons}
+                actionsByRow={<ActionComponent row={row} indexRow={rowIndex} />}
+              />
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      <Paginator
+        onChangePage={onChangePage}
+        onChangeSizePage={onChangeSizePage}
+        pageNo={pageNo}
+        pageSize={pageSize}
+        totalPages={totalPages}
+        resultsPerPage={resultsPerPage}
+      />
+    </>
+  );
+};
+
+const RowLoop = (props) => {
+  const {
+    row,
+    collapsibleComponent,
+    columnsData,
+    actionsButtons,
+    actionsByRow,
+  } = props;
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <TableRow>
+        <TableCell>
+          <IconButton
+            aria-label="expand row"
+            size="small"
+            onClick={() => setOpen(!open)}
+          >
+            {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+          </IconButton>
+        </TableCell>
+        {columnsData.map(({ label }, colIndex) => (
+          <TableCell
+            key={`${row}-${label}-${colIndex}${Math.random()}`}
+            align="center"
+          >
+            {row[label]}
+          </TableCell>
+        ))}
+        {!!actionsButtons && (
+          <TableCell align="center">{actionsByRow}</TableCell>
+        )}
+      </TableRow>
+      <TableRow>
+        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+          <Collapse in={open} timeout="auto" unmountOnExit>
+            {collapsibleComponent}
+          </Collapse>
+        </TableCell>
+      </TableRow>
+    </>
+  );
+};
+
+CollapsibleTable.propTypes = {
+  CollapsibleComponent: PropTypes.func.isRequired,
+};
+
+CollapsibleTable.defaultProps = {
+  CollapsibleComponent: () => {},
+};
+
+export default CollapsibleTable;

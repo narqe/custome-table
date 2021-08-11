@@ -1,0 +1,10 @@
+.CustomeTable__headerContainer {
+  display: flex;
+  margin: 10px 5px;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.CustomeTable__button {
+  margin: 0 5px !important;
+}
