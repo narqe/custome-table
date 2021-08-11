@@ -27,7 +27,7 @@ const CustomErrorDialog = ({
           container
           direction="row"
           alignItems="stretch"
-          justify="center"
+          justifyContent="center"
           spacing={0}
           className={`CustomErrorDialog__Grid CustomErrorDialog--${fullpage}`}
         >

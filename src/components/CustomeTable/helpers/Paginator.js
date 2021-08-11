@@ -48,8 +48,8 @@ const Paginator = (props) => {
       count={totalPages}
       page={page}
       rowsPerPage={rowsPerPage}
-      onChangePage={handleChangePage}
-      onChangeRowsPerPage={handleChangeRowsPerPage}
+      onPageChange={handleChangePage}
+      onRowsPerPageChange={handleChangeRowsPerPage}
       nextIconButtonText={t('nextPageLabel')}
       backIconButtonText={t('backPageLabel')}
       labelRowsPerPage={t('rowsPerPageLabel')}
