@@ -1,32 +1,32 @@
 
-.CustomDialog--true .CustomErrorDialog__Title {
+.CustomDialog--true .CustomeErrorDialog__Title {
   color: green;
 }
 
-.CustomDialog--error .CustomErrorDialog__Title {
+.CustomDialog--error .CustomeErrorDialog__Title {
   color: red;
   padding: 35px 10px 10px 50px;
 }
 
-.CustomErrorDialog--true {
+.CustomeErrorDialog--true {
   padding: 100px 185px 30px 100px;
   background-color: #fbfbfb;
 }
 
-.CustomErrorDialog__Content__Text {
+.CustomeErrorDialog__Content__Text {
   padding: 0 0 35px 26px;
 }
 
-.CustomErrorDialog__Content__ErrorMessage {
+.CustomeErrorDialog__Content__ErrorMessage {
   padding-left: 25px;
 }
 
-.CustomErrorDialog__Title svg {
+.CustomeErrorDialog__Title svg {
   vertical-align: middle;
   margin-right: 10px;
 }
 
-.CustomErrorDialog__Title span {
+.CustomeErrorDialog__Title span {
   font-size: 18px;
   text-transform: none;
 }
@@ -55,6 +55,6 @@
   padding-right: 185px;
 }
 
-.CustomErrorDialog__Content__Button {
+.CustomeErrorDialog__Content__Button {
   padding-left: 20px;
 }

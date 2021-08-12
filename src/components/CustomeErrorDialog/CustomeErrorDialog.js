@@ -8,10 +8,10 @@ import {
   Grid,
   Fab,
 } from '@material-ui/core';
-import './CustomErrorDialog.css';
+import './CustomeErrorDialog.css';
 import '../../translations/i18n';
 
-const CustomErrorDialog = ({
+const CustomeErrorDialog = ({
   fullpage,
   header,
   title,
@@ -29,29 +29,29 @@ const CustomErrorDialog = ({
           alignItems="stretch"
           justifyContent="center"
           spacing={0}
-          className={`CustomErrorDialog__Grid CustomErrorDialog--${fullpage}`}
+          className={`CustomeErrorDialog__Grid CustomeErrorDialog--${fullpage}`}
         >
-          <Grid key={0} item xs={7}>
-            <DialogTitle className="CustomErrorDialog__Header">
+          <Grid key={0} item xs={12} lg={6}>
+            <DialogTitle className="CustomeErrorDialog__Header">
               <Typography variant="overline">
                 <span>{header}</span>
               </Typography>
             </DialogTitle>
-            <DialogTitle className="CustomErrorDialog__Title">
+            <DialogTitle className="CustomeErrorDialog__Title">
               <Typography variant="button">
                 <span>{title}</span>
               </Typography>
             </DialogTitle>
-            <DialogContent className="CustomErrorDialog__Content">
+            <DialogContent className="CustomeErrorDialog__Content">
               <DialogContentText
                 component={'div'}
-                className="CustomErrorDialog__Content__Text"
+                className="CustomeErrorDialog__Content__Text"
               >
                 {message}
               </DialogContentText>
             </DialogContent>
           </Grid>
-          <Grid key={1} item xs={5}>
+          <Grid key={1} item xs={12} lg={6}>
             <DialogContent>
               <img className="CustomErrorPage__Gif" src={img} alt={title} />
             </DialogContent>
@@ -71,12 +71,12 @@ const CustomErrorDialog = ({
   );
 };
 
-CustomErrorDialog.defaultProps = {
+CustomeErrorDialog.defaultProps = {
   type: 'error',
   buttonText: 'closeLabel',
 };
 
-CustomErrorDialog.propTypes = {
+CustomeErrorDialog.propTypes = {
   type: PropTypes.string,
   header: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
@@ -87,4 +87,4 @@ CustomErrorDialog.propTypes = {
   img: PropTypes.string,
 };
 
-export default CustomErrorDialog;
+export default CustomeErrorDialog;

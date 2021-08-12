@@ -5,8 +5,8 @@ import './CustomeTable.css';
 import SimpleCheckableTable from './types/SimpleCheckableTable';
 import CollapsibleTable from './types/CollapsibleTable';
 import errors from '../Errors/errors';
-import CustomErrorDialog from '../CustomErrorDialog';
-import EmptyState from '../EmptyState';
+import CustomeErrorDialog from '../CustomeErrorDialog';
+import EmptyState from '../CustomeEmptyState';
 import MultiCheckableCollapsibleTable from './types/MultiCheckableCollapsibleTable';
 import TableLoading from './helpers/TableLoading';
 
@@ -50,7 +50,7 @@ const CustomeTable = (props) => {
 
   if (!!error) {
     return (
-      <CustomErrorDialog
+      <CustomeErrorDialog
         open
         fullpage={false}
         header={errorData.header}

@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import notResultsFound from '../../assets/noResults.png';
-import './EmptyState.css';
+import './CustomeEmptyState.css';
 
-const EmptyState = ({ title, subtitle }) => {
+const CustomeEmptyState = ({ title, subtitle }) => {
 
   return (
     <div
@@ -21,16 +21,16 @@ const EmptyState = ({ title, subtitle }) => {
   );
 };
 
-EmptyState.defaultProps = {
+CustomeEmptyState.defaultProps = {
   title: '',
   subtitle: '',
   loading: false,
 };
 
-EmptyState.propTypes = {
+CustomeEmptyState.propTypes = {
   title: PropTypes.string.isRequired,
   subtitle: PropTypes.string.isRequired,
   loading: PropTypes.bool,
 };
 
-export default EmptyState;
+export default CustomeEmptyState;

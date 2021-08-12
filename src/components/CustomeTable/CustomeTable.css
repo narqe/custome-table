@@ -1,8 +1,9 @@
 .CustomeTable__headerContainer {
   display: flex;
-  margin: 10px 5px;
+  margin: 10px 15px;
   align-items: flex-end;
   justify-content: space-between;
+  border-radius: 4px 4px 0px 0px;
 }
 
 .CustomeTable__button {

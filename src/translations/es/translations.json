@@ -259,5 +259,7 @@
   "duplicatePromo": "Duplicar promoción",
   "snackbarClonePromotion": "Para duplicar la promoción es necesario cambiar el nombre y la descripción.",
   "moreFilters": "Más filtros",
-  "lessFilters": "Menos filtros"
+  "lessFilters": "Menos filtros",
+  "rowsPerPageLabel": "Resultados por página: ",
+  "ofLabel": "de"
 }
