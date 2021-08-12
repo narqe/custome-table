@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const NewTableCollapsible = ({ row, indexRow }) => {
   return (
     <React.Fragment>
-      <div className="Container"> This is the component of collapsible for {indexRow} row </div>
+      <div className="Content"> This is the component of collapsible for {indexRow} row </div>
     </React.Fragment>
   );
 };

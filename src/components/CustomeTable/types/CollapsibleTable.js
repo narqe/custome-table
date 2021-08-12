@@ -112,12 +112,14 @@ const RowLoop = (props) => {
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCell>
-        {columnsData.map(({ label }, colIndex) => (
+        {columnsData.map(({ label, valueFixed = null }, colIndex) => (
           <TableCell
             key={`${row}-${label}-${colIndex}${Math.random()}`}
             align="center"
           >
-            {row[label]}
+            {!valueFixed
+              ? row[label]
+              : valueFixed(row[label])}
           </TableCell>
         ))}
         {!!actionsButtons && (

@@ -6,16 +6,16 @@ import DeleteIcon from '@material-ui/icons/Delete';
 export const COLUMN_DATA = [
   // headerName always should be the tag for translation
   { label: 'id', headerName: 'idLabel' },
-  { label: 'name', headerName: 'nameLabel' },
+  { label: 'title', headerName: 'nameLabel' },
   {
-    label: 'state',
-    headerName: 'statusLabel',
+    label: 'condition',
+    headerName: 'Condition',
     valueFixed: (value) => {
-      if (value === 'ACTIVE') {
+      if (value === 'new') {
         return (
           <Chip
             size="small"
-            label={'ACTIVE'}
+            label={'New'}
             clickable
             color="primary"
             deleteIcon={<DoneIcon />}
@@ -25,7 +25,7 @@ export const COLUMN_DATA = [
         return (
           <Chip
           size="small"
-          label={'INACTIVE'}
+          label={'Used'}
           clickable
           color="secondary"
           />

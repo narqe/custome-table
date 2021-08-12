@@ -50,12 +50,6 @@ const NewTable = () => {
     }
   };
 
-  // const [, setHasChanges] = useState(false);
-  // const onDragNDrop = (newRows) => {
-  //     setRows(newRows);
-  //     setHasChanges(true);
-  // };
-
   const onDragNDropConfirm = () => {
       alert('save changes fx')
   }
@@ -76,19 +70,44 @@ return (
       <div className="Container">
       <div>
         <CustomeTable
+          title="Simple Component"
+          subtitle="With checkable option abled"
+          type="simple"
+          isLoading={loading}
+          error={error}
+          statusCode={statusCode}
+          rowsData={rows.results}
+          checkable={true}
+          columnsData={COLUMN_DATA}
+          pageNo={rows.results ? rows.paging.offset : pageNo}
+          pageSize={rows.results ? rows.paging.limit: pageSize}
+          totalPages={rows.results ? rows.paging.total : 0}
+          resultsPerPage={[5, 10, 15]}
+          onChangePage={setPageNo}
+          onChangeSizePage={setPageSize}
+          actionsByRow={ActionComponent}
+          actionsButtons={true}
+          isDragNDrop={true}
+          onDragNDropCancel={onDragNDropCancel}
+          onDragNDropConfirm={onDragNDropConfirm}
+          massiveActionOnSelect={MASSIVE_ACTION_ON_SELECT}
+        />
+      </div>
+      <div>
+        <CustomeTable
           title="Multicollapsable Component"
           subtitle="Multicollapsable SubTitle"
           type="multi-collapsible"
           isLoading={loading}
           error={error}
           statusCode={statusCode}
-          rowsData={rows.content}
+          rowsData={rows.results}
           checkable={true}
           collapsibleComponent={CollapsibleComponent}
           columnsData={COLUMN_DATA}
-          pageNo={rows.number}
-          pageSize={rows.size}
-          totalPages={rows.totalPages}
+          pageNo={rows.results ? rows.paging.offset : pageNo}
+          pageSize={rows.results ? rows.paging.limit: pageSize}
+          totalPages={rows.results ?rows.paging.total : 0}
           resultsPerPage={[5, 10, 15]}
           onChangePage={setPageNo}
           onChangeSizePage={setPageSize}
@@ -105,13 +124,13 @@ return (
           isLoading={loading}
           error={error}
           statusCode={statusCode}
-          rowsData={rows.content}
+          rowsData={rows.results}
           checkable={true}
           collapsibleComponent={CollapsibleComponent}
           columnsData={COLUMN_DATA}
-          pageNo={rows.number}
-          pageSize={rows.size}
-          totalPages={rows.totalPages}
+          pageNo={rows.results ? rows.paging.offset : pageNo}
+          pageSize={rows.results ? rows.paging.limit: pageSize}
+          totalPages={rows.results ?rows.paging.total : 0}
           resultsPerPage={[5, 10, 15]}
           onChangePage={setPageNo}
           onChangeSizePage={setPageSize}
@@ -128,12 +147,12 @@ return (
           isLoading={loading}
           error={error}
           statusCode={statusCode}
-          rowsData={rows.content}
+          rowsData={rows.results}
           checkable={false}
           columnsData={COLUMN_DATA}
-          pageNo={rows.number}
-          pageSize={rows.size}
-          totalPages={rows.totalPages}
+          pageNo={rows.results ? rows.paging.offset : pageNo}
+          pageSize={rows.results ? rows.paging.limit: pageSize}
+          totalPages={rows.results ?rows.paging.total : 0}
           resultsPerPage={[5, 10, 15]}
           onChangePage={setPageNo}
           onChangeSizePage={setPageSize}
@@ -148,42 +167,39 @@ return (
       <div>
         <CustomeTable
           title="Simple Component"
-          subtitle="With checkable option abled"
           type="simple"
           isLoading={loading}
           error={error}
           statusCode={statusCode}
-          rowsData={rows.content}
-          checkable={true}
+          rowsData={rows.results}
+          checkable={false}
           columnsData={COLUMN_DATA}
-          pageNo={rows.number}
-          pageSize={rows.size}
-          totalPages={rows.totalPages}
+          
+          pageNo={rows.results ? rows.paging.offset : pageNo}
+          pageSize={rows.results ? rows.paging.limit: pageSize}
+          totalPages={rows.results ?rows.paging.total : 0}
           resultsPerPage={[5, 10, 15]}
           onChangePage={setPageNo}
           onChangeSizePage={setPageSize}
           actionsByRow={ActionComponent}
           actionsButtons={true}
           massiveActions={MASSIVE_ACTIONS}
-          isDragNDrop={true}
-          onDragNDropCancel={onDragNDropCancel}
-          onDragNDropConfirm={onDragNDropConfirm}
-          massiveActionOnSelect={MASSIVE_ACTION_ON_SELECT}
         />
       </div>
       <div>
         <CustomeTable
-          title="Simple Component"
+          emptyTitle="Empty component"
+          emptySubtitle="That's is how it's look like an Empty State"
           type="simple"
           isLoading={loading}
           error={error}
           statusCode={statusCode}
-          rowsData={rows.content}
+          rowsData={[]}
           checkable={false}
           columnsData={COLUMN_DATA}
-          pageNo={rows.number}
-          pageSize={rows.size}
-          totalPages={rows.totalPages}
+          pageNo={rows.results ? rows.paging.offset : pageNo}
+          pageSize={rows.results ? rows.paging.limit: pageSize}
+          totalPages={rows.results ?rows.paging.total : 0}
           resultsPerPage={[5, 10, 15]}
           onChangePage={setPageNo}
           onChangeSizePage={setPageSize}
@@ -191,52 +207,6 @@ return (
           actionsButtons={true}
           massiveActions={MASSIVE_ACTIONS}
         />
-      </div>
-      <div className="double-column">
-        <div>
-          <CustomeTable
-            emptyTitle="Empty component"
-            emptySubtitle="That's is how it's look like an Empty State"
-            type="simple"
-            isLoading={loading}
-            error={error}
-            statusCode={statusCode}
-            rowsData={[]}
-            checkable={false}
-            columnsData={COLUMN_DATA}
-            pageNo={rows.number}
-            pageSize={rows.size}
-            totalPages={rows.totalPages}
-            resultsPerPage={[5, 10, 15]}
-            onChangePage={setPageNo}
-            onChangeSizePage={setPageSize}
-            actionsByRow={ActionComponent}
-            actionsButtons={true}
-            massiveActions={MASSIVE_ACTIONS}
-          />
-        </div>
-        <div>
-          <CustomeTable
-            errorTitle="Error component"
-            errorSubtitle="That's is how it's look like an Error"
-            type="simple"
-            isLoading={loading}
-            error={true}
-            statusCode={500}
-            rowsData={[]}
-            checkable={false}
-            columnsData={COLUMN_DATA}
-            pageNo={rows.number}
-            pageSize={rows.size}
-            totalPages={rows.totalPages}
-            resultsPerPage={[5, 10, 15]}
-            onChangePage={setPageNo}
-            onChangeSizePage={setPageSize}
-            actionsByRow={ActionComponent}
-            actionsButtons={true}
-            massiveActions={MASSIVE_ACTIONS}
-          />
-        </div>
       </div>
       <div>
         <CustomeTable
@@ -249,9 +219,31 @@ return (
           rowsData={[]}
           checkable={false}
           columnsData={COLUMN_DATA}
-          pageNo={rows.number}
-          pageSize={rows.size}
-          totalPages={rows.totalPages}
+          pageNo={rows.results ? rows.paging.offset : pageNo}
+          pageSize={rows.results ? rows.paging.limit: pageSize}
+          totalPages={rows.results ?rows.paging.total : 0}
+          resultsPerPage={[5, 10, 15]}
+          onChangePage={setPageNo}
+          onChangeSizePage={setPageSize}
+          actionsByRow={ActionComponent}
+          actionsButtons={true}
+          massiveActions={MASSIVE_ACTIONS}
+        />
+      </div>
+      <div>
+        <CustomeTable
+          errorTitle="Error component"
+          errorSubtitle="That's is how it's look like an Error"
+          type="simple"
+          isLoading={loading}
+          error={true}
+          statusCode={404}
+          rowsData={[]}
+          checkable={false}
+          columnsData={COLUMN_DATA}
+          pageNo={rows.results ? rows.paging.offset : pageNo}
+          pageSize={rows.results ? rows.paging.limit: pageSize}
+          totalPages={rows.results ?rows.paging.total : 0}
           resultsPerPage={[5, 10, 15]}
           onChangePage={setPageNo}
           onChangeSizePage={setPageSize}

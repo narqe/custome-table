@@ -11,12 +11,12 @@ const NewTableActions = ({ row, indexRow }) => {
   return (
     <React.Fragment>
       <Tooltip TransitionComponent={Zoom} title="">
-        <IconButton id={'Clone' + indexRow} component={Link} to={''}>
+        <IconButton id={'Clone' + indexRow} component={Link} to={''} size='small' >
           <FileCopyIcon />
         </IconButton>
       </Tooltip>
       <Tooltip TransitionComponent={Zoom} title="">
-        <IconButton id={'Clone' + indexRow} component={Link} to={''}>
+        <IconButton id={'Clone' + indexRow} component={Link} to={''} size='small'>
           <DeleteIcon />
         </IconButton>
       </Tooltip>

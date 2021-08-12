@@ -112,12 +112,14 @@ const SimpleTableType = ({
                                 <DragNDropIcon />
                               </TableCell>
                             )}
-                            {columnsData.map(({ label }) => (
+                            {columnsData.map(({ label, valueFixed = null }) => (
                               <TableCell
                                 key={`${row[indexRow]}-${label}`}
                                 align="center"
                               >
-                                {row[label]}
+                                {!valueFixed
+                                  ? row[label]
+                                  : valueFixed(row[label])}
                               </TableCell>
                             ))}
                             {!!actionsButtons && (

@@ -38,6 +38,7 @@ const MultiCheckableCollapsibleTable = ({
 }) => {
   const { t } = useTranslation();
   const [selected, setSelected] = useState([]);
+  
   const EnhancedTableHead = (props) => {
     const { onSelectAllClick, numSelected, rowCount } = props;
 
@@ -184,12 +185,14 @@ const RowLoop = (props) => {
         <TableCell padding="checkbox" onClick={() => actionEvent()}>
           <Checkbox checked={selected} />
         </TableCell>
-        {columnsData.map(({ label }, colIndex) => (
+        {columnsData.map(({ label, valueFixed = null }, colIndex) => (
           <TableCell
             key={`${row}-${label}-${colIndex}${Math.random()}`}
             align="center"
           >
-            {row[label]}
+            {!valueFixed
+              ? row[label]
+              : valueFixed(row[label])}
           </TableCell>
         ))}
         {!!actionsButtons && (
