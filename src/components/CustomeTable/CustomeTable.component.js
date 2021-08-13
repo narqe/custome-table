@@ -9,8 +9,11 @@ import CustomeErrorDialog from '../CustomeErrorDialog';
 import EmptyState from '../CustomeEmptyState';
 import MultiCheckableCollapsibleTable from './types/MultiCheckableCollapsibleTable';
 import TableLoading from './helpers/TableLoading';
+import { useTranslation } from 'react-i18next';
+import '../../translations/i18n';
 
 const CustomeTable = (props) => {
+  const { t } = useTranslation()
   const {
     title,
     subtitle,
@@ -29,6 +32,7 @@ const CustomeTable = (props) => {
     pageSize,
     resultsPerPage,
     totalPages,
+    frontPagination,
     onChangePage,
     onChangeSizePage,
     actionsByRow,
@@ -57,8 +61,7 @@ const CustomeTable = (props) => {
         img={errorData.svg}
         title={errorTitle}
         message={errorSubtitle}
-        buttonText={errorData.buttonText}
-        showDetails={errorData.showDetails}
+        buttonText={t(errorData.buttonText)}
       />
     );
   } else {
@@ -80,6 +83,7 @@ const CustomeTable = (props) => {
             pageNo,
             pageSize,
             totalPages,
+            frontPagination,
             onChangePage,
             onChangeSizePage,
             resultsPerPage,
@@ -104,6 +108,7 @@ const CustomeTable = (props) => {
             pageNo,
             pageSize,
             totalPages,
+            frontPagination,
             resultsPerPage,
             onChangePage,
             onChangeSizePage,
@@ -129,6 +134,7 @@ const CustomeTable = (props) => {
             pageNo,
             pageSize,
             totalPages,
+            frontPagination,
             onChangePage,
             onChangeSizePage,
             resultsPerPage,
@@ -166,6 +172,7 @@ CustomeTable.propTypes = {
   pageNo: PropTypes.number.isRequired,
   pageSize: PropTypes.number.isRequired,
   totalPages: PropTypes.number.isRequired,
+  frontPagination: PropTypes.bool.isRequired,
   resultsPerPage: PropTypes.arrayOf(PropTypes.number),
   massiveActions: PropTypes.arrayOf(PropTypes.object),
   actionsByRow:
@@ -194,6 +201,7 @@ CustomeTable.defaultProps = {
   pageSize: 10,
   totalPages: 0,
   resultsPerPage: [10, 25, 100],
+  frontPagination: false,
 };
 
 export default CustomeTable;

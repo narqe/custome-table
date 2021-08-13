@@ -26,6 +26,7 @@ const SimpleCheckableTable = ({
   pageNo,
   pageSize,
   resultsPerPage,
+  frontPagination,
   onChangePage,
   onChangeSizePage,
   totalPages,
@@ -142,9 +143,9 @@ const SimpleCheckableTable = ({
             <Droppable droppableId="custom-table-body-id">
               {(provided) => (
                 <TableBody {...provided.droppableProps} ref={provided.innerRef}>
-                  {rowsData
-                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                    .map((row, indexRow) => {
+                  {!!frontPagination ? 
+                    rowsData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage) :
+                    rowsData.map((row, indexRow) => {
                       const isItemSelected = isSelected(row.id);
                       const labelId = `enhanced-table-checkbox-${indexRow}`;
 
@@ -183,17 +184,25 @@ const SimpleCheckableTable = ({
                                     inputProps={{ 'aria-labelledby': labelId }}
                                   />
                                 </TableCell>
-                                {columnsData.map(
-                                  ({ label, valueFixed = null }) => (
-                                    <TableCell
-                                      key={`${row[indexRow]}-${label}`}
-                                      align="center"
-                                    >
-                                      {!valueFixed
-                                        ? row[label]
-                                        : valueFixed(row[label])}
-                                    </TableCell>
-                                  )
+                                {columnsData.map(({
+                                  label,
+                                  valueFixed = null,
+                                  translationsLabel = null,
+                                }) => {
+                                  let translation = !!translationsLabel
+                                    ? t(translationsLabel[`${row[label]}`])
+                                    : '';
+                                    return (
+                                      <TableCell
+                                        key={`${row[indexRow]}-${label}`}
+                                        align="center"
+                                      >
+                                        {!valueFixed
+                                          ? row[label]
+                                          : valueFixed(row[label], translation)}
+                                      </TableCell>
+                                    );
+                                  }
                                 )}
                                 {!!actionsButtons && (
                                   <TableCell align="center">
@@ -218,7 +227,7 @@ const SimpleCheckableTable = ({
         onChangeSizePage={onChangeSizePage}
         pageNo={page}
         pageSize={rowsPerPage}
-        totalPages={totalPages}
+        totalPages={!!frontPagination ? rowsData.length : totalPages}
         resultsPerPage={resultsPerPage}
       />
     </>

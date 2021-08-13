@@ -4,7 +4,6 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import TRANSLATIONS_ES from '../translations/es/translations.json';
-import TRANSLATIONS_EN from '../translations/en/translations.json';
 
 i18n
   .use(LanguageDetector)
@@ -12,13 +11,10 @@ i18n
   .init({
     returnEmptyString: false,
     resources: {
-      supportedLngs: ['en', 'es'],
+      supportedLngs: ['es'],
       fallbackLng: 'es',
       es: {
         translation: TRANSLATIONS_ES,
-      },
-      en: {
-        translation: TRANSLATIONS_EN,
       },
     },
     lng: 'es',

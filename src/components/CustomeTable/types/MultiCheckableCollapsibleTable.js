@@ -29,6 +29,7 @@ const MultiCheckableCollapsibleTable = ({
   pageSize,
   isLoading,
   resultsPerPage,
+  frontPagination,
   onChangePage,
   onChangeSizePage,
   totalPages,
@@ -117,7 +118,9 @@ const MultiCheckableCollapsibleTable = ({
             rowCount={rowsData.length}
           />
           <TableBody>
-            {rowsData.map((row, rowIndex) => {
+            {!!frontPagination ? 
+              rowsData.slice(pageNo * pageSize, pageNo * pageSize + pageSize) :
+              rowsData.map((row, rowIndex) => {
               const isItemSelected = isSelected(!!row.id ? row.id : row.code);
 
               return (
@@ -151,7 +154,7 @@ const MultiCheckableCollapsibleTable = ({
         onChangeSizePage={onChangeSizePage}
         pageNo={pageNo}
         pageSize={pageSize}
-        totalPages={totalPages}
+        totalPages={!!frontPagination ? rowsData.length : totalPages}
         resultsPerPage={resultsPerPage}
       />
     </>
@@ -159,6 +162,7 @@ const MultiCheckableCollapsibleTable = ({
 };
 
 const RowLoop = (props) => {
+  const {t} = useTranslation()
   const {
     row,
     collapsibleComponent,
@@ -185,16 +189,26 @@ const RowLoop = (props) => {
         <TableCell padding="checkbox" onClick={() => actionEvent()}>
           <Checkbox checked={selected} />
         </TableCell>
-        {columnsData.map(({ label, valueFixed = null }, colIndex) => (
-          <TableCell
-            key={`${row}-${label}-${colIndex}${Math.random()}`}
-            align="center"
-          >
-            {!valueFixed
-              ? row[label]
-              : valueFixed(row[label])}
-          </TableCell>
-        ))}
+        {columnsData.map(({
+          label,
+          valueFixed = null,
+          translationsLabel = null,
+        }, indexRow) => {
+          let translation = !!translationsLabel
+            ? t(translationsLabel[`${row[label]}`])
+            : '';
+            return (
+              <TableCell
+                key={`${row[indexRow]}-${label}`}
+                align="center"
+              >
+                {!valueFixed
+                  ? row[label]
+                  : valueFixed(row[label], translation)}
+              </TableCell>
+            );
+          }
+        )}
         {!!actionsButtons && (
           <TableCell align="center">{actionsByRow}</TableCell>
         )}

@@ -26,6 +26,7 @@ const CollapsibleTable = ({
   pageNo,
   pageSize,
   resultsPerPage,
+  frontPagination,
   onChangePage,
   onChangeSizePage,
   totalPages,
@@ -62,7 +63,9 @@ const CollapsibleTable = ({
             </TableRow>
           </TableHead>
           <TableBody>
-            {rowsData.map((row, rowIndex) => (
+          {!!frontPagination ? 
+            rowsData.slice(pageNo * pageSize, pageNo * pageSize + pageSize) :
+            rowsData.map((row, rowIndex) => (
               <RowLoop
                 key={Math.random()}
                 index={Math.random()}
@@ -83,7 +86,7 @@ const CollapsibleTable = ({
         onChangeSizePage={onChangeSizePage}
         pageNo={pageNo}
         pageSize={pageSize}
-        totalPages={totalPages}
+        totalPages={!!frontPagination ? rowsData.length : totalPages}
         resultsPerPage={resultsPerPage}
       />
     </>
@@ -91,6 +94,7 @@ const CollapsibleTable = ({
 };
 
 const RowLoop = (props) => {
+  const { t } = useTranslation()
   const {
     row,
     collapsibleComponent,
@@ -112,16 +116,26 @@ const RowLoop = (props) => {
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCell>
-        {columnsData.map(({ label, valueFixed = null }, colIndex) => (
-          <TableCell
-            key={`${row}-${label}-${colIndex}${Math.random()}`}
-            align="center"
-          >
-            {!valueFixed
-              ? row[label]
-              : valueFixed(row[label])}
-          </TableCell>
-        ))}
+        {columnsData.map(({
+          label,
+          valueFixed = null,
+          translationsLabel = null,
+        }, indexRow) => {
+          let translation = !!translationsLabel
+            ? t(translationsLabel[`${row[label]}`])
+            : '';
+            return (
+              <TableCell
+                key={`${row[indexRow]}-${label}`}
+                align="center"
+              >
+                {!valueFixed
+                  ? row[label]
+                  : valueFixed(row[label], translation)}
+              </TableCell>
+            );
+          }
+        )}
         {!!actionsButtons && (
           <TableCell align="center">{actionsByRow}</TableCell>
         )}

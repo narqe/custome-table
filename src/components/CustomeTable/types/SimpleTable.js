@@ -27,6 +27,7 @@ const SimpleTableType = ({
   pageSize,
   isLoading,
   resultsPerPage,
+  frontPagination,
   onChangePage,
   onChangeSizePage,
   totalPages,
@@ -89,7 +90,12 @@ const SimpleTableType = ({
             <Droppable droppableId="custom-table-body-id">
               {(provided) => (
                 <TableBody {...provided.droppableProps} ref={provided.innerRef}>
-                  {rowsData.map((row, indexRow) => (
+                  {!!frontPagination
+                    ? rowsData.slice(
+                        pageNo * pageSize,
+                        pageNo * pageSize + pageSize
+                      )
+                    : rowsData.map((row, indexRow) => (
                     <Draggable
                       key={`${row}${indexRow}-row`}
                       draggableId={indexRow.toString()}
@@ -112,16 +118,26 @@ const SimpleTableType = ({
                                 <DragNDropIcon />
                               </TableCell>
                             )}
-                            {columnsData.map(({ label, valueFixed = null }) => (
-                              <TableCell
-                                key={`${row[indexRow]}-${label}`}
-                                align="center"
-                              >
-                                {!valueFixed
-                                  ? row[label]
-                                  : valueFixed(row[label])}
-                              </TableCell>
-                            ))}
+                            {columnsData.map(({
+                              label,
+                              valueFixed = null,
+                              translationsLabel = null,
+                            }) => {
+                              let translation = !!translationsLabel
+                                ? t(translationsLabel[`${row[label]}`])
+                                : '';
+                                return (
+                                  <TableCell
+                                    key={`${row[indexRow]}-${label}`}
+                                    align="center"
+                                  >
+                                    {!valueFixed
+                                      ? row[label]
+                                      : valueFixed(row[label], translation)}
+                                  </TableCell>
+                                );
+                              }
+                            )}
                             {!!actionsButtons && (
                               <TableCell align="center">
                                 <ActionComponent
@@ -147,7 +163,7 @@ const SimpleTableType = ({
         onChangeSizePage={onChangeSizePage}
         pageNo={pageNo}
         pageSize={pageSize}
-        totalPages={totalPages}
+        totalPages={!!frontPagination ? rowsData.length : totalPages}
         resultsPerPage={resultsPerPage}
       />
     </>

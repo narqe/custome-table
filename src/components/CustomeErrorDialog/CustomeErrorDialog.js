@@ -9,7 +9,6 @@ import {
   Fab,
 } from '@material-ui/core';
 import './CustomeErrorDialog.css';
-import '../../translations/i18n';
 
 const CustomeErrorDialog = ({
   fullpage,
@@ -18,7 +17,6 @@ const CustomeErrorDialog = ({
   message,
   buttonText,
   img,
-  errorMessage,
 }) => {
 
   return (

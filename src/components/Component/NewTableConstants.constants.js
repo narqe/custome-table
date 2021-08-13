@@ -1,38 +1,22 @@
 import React from 'react';
-import { Chip } from '@material-ui/core';
-import DoneIcon from '@material-ui/icons/Done';
 import DeleteIcon from '@material-ui/icons/Delete';
+import { stateWithChip } from '../CustomeTable/helpers/StateWithChip';
 
 export const COLUMN_DATA = [
   // headerName always should be the tag for translation
-  { label: 'id', headerName: 'idLabel' },
   { label: 'title', headerName: 'nameLabel' },
   {
     label: 'condition',
-    headerName: 'Condition',
-    valueFixed: (value) => {
-      if (value === 'new') {
-        return (
-          <Chip
-            size="small"
-            label={'New'}
-            clickable
-            color="primary"
-            deleteIcon={<DoneIcon />}
-          />
-        )
-      } else {
-        return (
-          <Chip
-          size="small"
-          label={'Used'}
-          clickable
-          color="secondary"
-          />
-        )
-      }
+    headerName: 'conditionLabel',
+    valueFixed: (value, label) => stateWithChip(value, label),
+    translationsLabel: {
+      // properties should be the response recived 
+      // value should be the tag for translation
+      new: 'newLabel',
+      used: 'usedLabel',
     },
   },
+  { label: 'price', headerName: 'priceLabel', valueFixed: (value) => `$ ${value}` },
 ];
 
 export const MASSIVE_ACTION_ON_SELECT = {
